@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Fuck YouTube Premium
-// @namespace    https://github.com/JackieRoxs/
+// @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       JackieRoxs
-// @match        https://www.youtube.com/watch?v=*
+// @author       You
+// @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        none
 // ==/UserScript==
@@ -13,7 +13,10 @@
     'use strict';
 
     function runScript() {
-    var secondaryElement = document.getElementById("secondary");
+    if (window.location.href.includes("watch?v=")) {
+        console.log("Watching Video");
+        setTimeout(function() {
+        var secondaryElement = document.getElementById("secondary");
     var primary = document.getElementById("primary");
     if (secondaryElement) {
         var intervalId = setInterval(function() {
@@ -39,16 +42,27 @@
             }
         }, 1000); // Execute the interval function every second (1000 milliseconds)
     }
+            }, 3000);
+    }
 }
 
 setTimeout(function() {
-    runScript(); // Execute the script after 10 seconds (10000 milliseconds) of page loading
+    if (window.location.href.includes("watch?v=")) {
+        runScript();
+    }
 }, 1000);
 
-window.onhashchange = function() {
-    runScript(); // Execute the script whenever the location changes
-};
+var localurl = location.href;
 
+    function refreshlink() {
+        if (location.href !== localurl) {
+            console.log('URL has changed');
+            runScript();
+            // Perform actions or execute functions when the URL changes
+            // Add your custom code here
+        }
+        localurl = location.href;
+    }
 
-
+    setInterval(refreshlink, 500);
 })();
