@@ -13,8 +13,6 @@
     'use strict';
 
     function runScript() {
-    if (window.location.href.includes("watch?v=")) {
-        console.log("Watching Video");
         setTimeout(function() {
         var secondaryElement = document.getElementById("secondary");
     var primary = document.getElementById("primary");
@@ -35,16 +33,16 @@
             var children = primary.children;
             for (var i = 0; i < children.length; i++) {
                 var child = children[i];
-                if (child.id !== "primary-inner") {
+                if (child.id !== "primary-inner" && child.id !== "header" && child.id !== "big-yoodle" && child.id !== "title-container" && child.id !== "spinner-container" && child.id !== "contents") {
                     child.remove();
                     break;
                 }
+
             }
         }, 1000); // Execute the interval function every second (1000 milliseconds)
     }
             }, 3000);
     }
-}
 
 setTimeout(function() {
     if (window.location.href.includes("watch?v=")) {
