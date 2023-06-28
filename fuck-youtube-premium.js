@@ -55,7 +55,9 @@ var localurl = location.href;
     function refreshlink() {
         if (location.href !== localurl) {
             console.log('URL has changed');
-            runScript();
+            if (window.location.href.includes("watch?v=")) {
+                runScript();
+            }
             // Perform actions or execute functions when the URL changes
             // Add your custom code here
         }
